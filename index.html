@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section id="authPage" class="auth-page">
+        <div class="auth-side">
+            <div class="brand-mark">IM</div>
+            <p class="eyebrow">BUSINESS MANAGEMENT</p>
+            <h1>Everything in one place.</h1>
+            <p>Manage reservations, sales, and inventory with one simple system.</p>
+            <div class="auth-points"><span>✓ Easy to use</span><span>✓ Organized records</span><span>✓ Simple reports</span></div>
+        </div>
+        <div class="auth-content">
+            <form id="authForm" class="auth-card">
+                <p class="eyebrow blue-text">WELCOME</p>
+                <h2 id="authTitle">Create your account</h2>
+                <p id="authSubtitle" class="muted">Sign up to get started with the system.</p>
+                <div id="nameGroup" class="field"><label for="authName">Full name</label><input id="authName" type="text" placeholder="Enter your full name" autocomplete="name"></div>
+                <div class="field"><label for="authEmail">Email address</label><input id="authEmail" type="email" placeholder="name@example.com" autocomplete="email" required></div>
+                <div class="field"><label for="authPassword">Password</label><input id="authPassword" type="password" placeholder="At least 6 characters" minlength="6" autocomplete="new-password" required></div>
+                <p id="roleNote" class="small-note">The first account becomes the Owner. New accounts after that are Staff.</p>
+                <button id="authSubmit" class="primary-button full-button" type="submit">Create account</button>
+                <p class="auth-switch"><span id="switchText">Already have an account?</span> <button id="switchAuth" type="button" class="text-button">Sign in</button></p>
+                <p id="authMessage" class="form-message"></p>
+            </form>
+        </div>
+    </section>
+
+    <div id="appPage" class="app-shell hidden">
+        <aside class="sidebar">
+            <div class="sidebar-brand"><div class="brand-mark small-mark">IM</div><div><strong>ManageHub</strong><span>Business system</span></div></div>
+            <p class="nav-heading">MENU</p>
+            <nav class="side-nav">
+                <button class="nav-button active" data-page="dashboard"><span>▦</span> Dashboard</button>
+                <button class="nav-button" data-page="reservations"><span>▣</span> Reservations</button>
+                <button class="nav-button" data-page="sales"><span>₱</span> Sales / POS</button>
+                <button class="nav-button" data-page="inventory"><span>▤</span> Inventory</button>
+                <button class="nav-button" data-page="reports"><span>▥</span> Reports</button>
+                <button class="nav-button owner-only" data-page="users"><span>♙</span> User Management</button>
+            </nav>
+            <div class="sidebar-bottom"><div class="help-box"><strong>Need help?</strong><p>Check the README file for setup instructions.</p></div><button id="logoutButton" class="logout-button">↪ &nbsp; Sign out</button></div>
+        </aside>
+
+        <main class="main-area">
+            <header class="topbar"><div><p class="eyebrow blue-text">WORKSPACE</p><h1 id="pageHeading">Dashboard</h1></div><div class="top-user"><div class="avatar" id="userInitial">U</div><div><strong id="currentUser">User</strong><span id="currentRole">Staff</span></div></div></header>
+            <div id="globalMessage" class="global-message"></div>
+
+            <section id="dashboard" class="page">
+                <div class="welcome-row"><div><h2>Welcome back!</h2><p class="muted">Here's what's happening in your business today.</p></div><span class="today-label" id="todayLabel"></span></div>
+                <div class="stats-grid">
+                    <article class="stat-card"><div class="stat-icon purple">▣</div><p>Active reservations</p><h3 id="reservationCount">0</h3><span class="stat-foot">Confirmed bookings</span></article>
+                    <article class="stat-card"><div class="stat-icon green">₱</div><p>Sales today</p><h3 id="salesToday">₱0.00</h3><span class="stat-foot">Today's recorded sales</span></article>
+                    <article class="stat-card"><div class="stat-icon blue">▤</div><p>Inventory items</p><h3 id="inventoryCount">0</h3><span class="stat-foot">Different stock items</span></article>
+                    <article class="stat-card"><div class="stat-icon orange">!</div><p>Low stock alerts</p><h3 id="lowStockCount">0</h3><span class="stat-foot">Items needing attention</span></article>
+                </div>
+                <div class="content-card"><div class="card-heading"><div><h3>Recent activity</h3><p class="muted">Latest actions recorded in the system</p></div></div><ul id="activityList" class="activity-list"><li>No activity yet.</li></ul></div>
+            </section>
+
+            <section id="reservations" class="page hidden">
+                <div class="section-intro"><div><h2>Reservations</h2><p class="muted">Create and manage customer bookings.</p></div></div>
+                <div class="content-card"><div class="card-heading"><h3 id="reservationFormTitle">New reservation</h3></div>
+                    <form id="reservationForm" class="form-grid">
+                        <div class="field"><label for="customerName">Customer name</label><input id="customerName" placeholder="Enter customer name" required></div>
+                        <div class="field"><label for="bookingDate">Booking date</label><input id="bookingDate" type="date" required></div>
+                        <div class="field"><label for="bookingTime">Booking time</label><input id="bookingTime" type="time" required></div>
+                        <div class="field"><label for="guestCount">Number of guests</label><input id="guestCount" type="number" min="1" placeholder="e.g. 4" required></div>
+                        <div class="field"><label for="depositAmount">Deposit amount (₱)</label><input id="depositAmount" type="number" min="0" step="0.01" placeholder="0.00" value="0" required></div>
+                        <div class="field"><label for="bookingPayment">Payment status</label><select id="bookingPayment"><option>Unpaid</option><option>Partial</option><option>Paid</option></select></div>
+                        <div class="form-actions"><button class="primary-button" type="submit" id="reservationSubmit">Add reservation</button><button class="light-button hidden" type="button" id="cancelReservationEdit">Cancel edit</button></div>
+                    </form>
+                </div>
+                <div class="content-card"><div class="card-heading"><div><h3>Booking records</h3><p class="muted">All current and cancelled bookings</p></div><input id="reservationSearch" class="search-input" placeholder="Search customer..."></div><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Date & time</th><th>Guests</th><th>Deposit</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead><tbody id="reservationRows"></tbody></table></div></div>
+            </section>
+
+            <section id="sales" class="page hidden">
+                <div class="section-intro"><div><h2>Sales / Point of Sale</h2><p class="muted">Record a sale and automatically update matching stock.</p></div></div>
+                <div class="content-card"><div class="card-heading"><h3>New transaction</h3></div><form id="saleForm" class="form-grid three-columns">
+                    <div class="field"><label for="saleItem">Item / product</label><input id="saleItem" placeholder="Enter item name" required></div>
+                    <div class="field"><label for="saleQuantity">Quantity</label><input id="saleQuantity" type="number" min="1" placeholder="1" required></div>
+                    <div class="field"><label for="salePrice">Price per item (₱)</label><input id="salePrice" type="number" min="0.01" step="0.01" placeholder="0.00" required></div>
+                    <div class="form-actions"><button class="primary-button" type="submit">Record sale</button></div>
+                </form><p class="small-note">If the product name matches an inventory item, its quantity will be deducted automatically.</p></div>
+                <div class="content-card"><div class="card-heading"><div><h3>Transactions</h3><p class="muted">Recorded sales history</p></div></div><div class="table-wrap"><table><thead><tr><th>Transaction</th><th>Date</th><th>Item</th><th>Quantity</th><th>Unit price</th><th>Total</th><th>Recorded by</th></tr></thead><tbody id="saleRows"></tbody></table></div></div>
+            </section>
+
+            <section id="inventory" class="page hidden">
+                <div class="section-intro"><div><h2>Inventory</h2><p class="muted">Monitor stock quantities and low-stock levels.</p></div></div>
+                <div class="content-card"><div class="card-heading"><h3 id="inventoryFormTitle">Add inventory item</h3></div><form id="inventoryForm" class="form-grid three-columns">
+                    <div class="field"><label for="stockName">Item name</label><input id="stockName" placeholder="Enter item name" required></div>
+                    <div class="field"><label for="stockQuantity">Quantity</label><input id="stockQuantity" type="number" min="0" placeholder="0" required></div>
+                    <div class="field"><label for="stockLimit">Low-stock level</label><input id="stockLimit" type="number" min="0" value="5" required></div>
+                    <div class="form-actions"><button class="primary-button" type="submit" id="inventorySubmit">Add item</button><button class="light-button hidden" type="button" id="cancelInventoryEdit">Cancel edit</button></div>
+                </form></div>
+                <div class="content-card"><div class="card-heading"><div><h3>Stock list</h3><p class="muted">Current quantity for each item</p></div><input id="inventorySearch" class="search-input" placeholder="Search item..."></div><div class="table-wrap"><table><thead><tr><th>Item</th><th>Quantity</th><th>Low-stock level</th><th>Status</th><th>Actions</th></tr></thead><tbody id="inventoryRows"></tbody></table></div></div>
+            </section>
+
+            <section id="reports" class="page hidden">
+                <div class="section-intro"><div><h2>Reports</h2><p class="muted">View sales and booking summaries.</p></div></div>
+                <div class="content-card"><div class="report-filter"><div class="field"><label for="reportPeriod">Report period</label><select id="reportPeriod"><option value="today">Daily</option><option value="week">Last 7 days</option><option value="month">This month</option></select></div><button id="generateReport" class="primary-button" type="button">Generate report</button></div></div>
+                <div class="stats-grid report-stats"><article class="stat-card"><p>Total sales</p><h3 id="reportSales">₱0.00</h3></article><article class="stat-card"><p>Confirmed bookings</p><h3 id="reportBookings">0</h3></article><article class="stat-card"><p>Transactions</p><h3 id="reportTransactions">0</h3></article></div>
+            </section>
+
+            <section id="users" class="page hidden owner-only">
+                <div class="section-intro"><div><h2>User management</h2><p class="muted">View registered accounts and system activity.</p></div></div>
+                <div class="content-card"><div class="card-heading"><h3>Registered users</h3></div><div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Date created</th></tr></thead><tbody id="userRows"></tbody></table></div></div>
+                <div class="content-card"><div class="card-heading"><h3>Activity / audit trail</h3></div><div class="table-wrap"><table><thead><tr><th>User</th><th>Activity</th><th>Date</th></tr></thead><tbody id="auditRows"></tbody></table></div></div>
+            </section>
+            <footer class="footer-note">Integrated Reservation, Sales, and Inventory Management System</footer>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html> 

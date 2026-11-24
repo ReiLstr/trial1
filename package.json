@@ -1,0 +1,17 @@
+{
+  "name": "integrated-reservation-sales-inventory-system",
+  "version": "1.0.0",
+  "description": "Beginner-friendly Integrated Reservation, Sales, and Inventory Management System",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-session": "^2.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5"
+  }
+}
